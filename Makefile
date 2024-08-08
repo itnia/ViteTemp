@@ -1,5 +1,6 @@
 # TODO: первое усановка зависемостей
 
+# TODO: make install
 # TODO: make dev - запустить vite & php server
 # TODO: make break
 # TODO: make build
