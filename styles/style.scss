@@ -1,0 +1,9 @@
+body {
+  background-color: red;
+}
+
+.test {
+  &__div {
+    background-color: green;
+  }
+}
