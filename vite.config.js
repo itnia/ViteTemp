@@ -3,7 +3,7 @@ import injectHTML from 'vite-plugin-html-inject';
 import path from 'path';
 import fs from 'fs';
 
-// TODO: функция переброса изображений
+// TODO: функция переброса изображений если не в public
 
 function getHtmlEntries() {
     const pagesDir = path.resolve(__dirname + '/pages', "");
@@ -29,9 +29,9 @@ export default defineConfig({
     build: {
         rollupOptions: {
             output: {
-                dir: './app/', // TODO: ./dist/
+                dir: './dist/',
                 entryFileNames: 'srcipts/script.main.js',
-                assetFileNames: 'styles/style.main.css',
+                assetFileNames: 'styles/style.main.css', // TODO: разделить сборку css, и других файлов
                 manualChunks: undefined,
             },
             input: getHtmlEntries(),
