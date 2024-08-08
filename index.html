@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Pages</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+</head>
+
+<body>
+    <div x-data="navigation">
+        <ul class="nav-list">
+            <template x-for="file in files">
+                <li class="nav-list__item">
+                    <a class="nav-list__link" x-bind:href="file" x-text="file"></a>
+                </li>
+            </template>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('navigation', () => ({
+                files: null,
+
+                async retrieveData() {
+                    this.files = await (await fetch('http://127.0.0.1:4242/get_pages')).json();
+                    console.log(this.files)
+                },
+
+                init() {
+                    this.retrieveData();
+                }
+
+            }));
+        });
+
+    </script>
+
+    <style>
+        .nav-list {
+            display: inline-flex;
+            flex-direction: column;
+            font-size: 1.5rem;
+            gap: .5rem;
+            list-style: none;
+            min-width: 30rem;
+        }
+
+        .nav-list__item {
+            border-bottom: 1px solid;
+            padding-bottom: .75rem;
+        }
+
+        .nav-list__link,
+        .nav-list__link:active {
+            text-decoration: none;
+            color: rgb(2, 53, 98);
+        }
+
+        .nav-list__link:hover {
+            color: rgb(0, 124, 177);
+        }
+    </style>
+</body>
+
+</html>
