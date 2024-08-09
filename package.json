@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "vite build && scp -r ./dist/ CHAIRKIN@192.168.1.10:/volume1/www/frontend-dev/public/test",
+    "deploy": "scp -r ./dist/* CHAIRKIN@192.168.1.10:/volume1/www/frontend-dev/public/test",
     "serve": "php -S 127.0.0.1:4242 server/tools.php"
   },
   "devDependencies": {
