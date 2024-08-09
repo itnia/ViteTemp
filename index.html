@@ -5,37 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navigation Pages Developer</title>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
 </head>
 
 <body>
-    <div x-data="navigation">
+
+    <div id="app"></div>
+
+    <script type="module">
+        const pages = import.meta.glob('./pages/**/*.html');
+        let items = '';
+        for (let key in pages) {
+            key = key.slice(1);
+            items += `
+            <li class="nav-list__item">
+                <a class="nav-list__link" href="${key}">${key}</a>
+            </li>
+            `
+        }
+        document.querySelector('#app').innerHTML = `
         <ul class="nav-list">
-            <template x-for="file in files">
-                <li class="nav-list__item">
-                    <a class="nav-list__link" x-bind:href="file" x-text="file"></a>
-                </li>
-            </template>
+            ${items}
         </ul>
-    </div>
-
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('navigation', () => ({
-                files: null,
-
-                async retrieveData() {
-                    this.files = await (await fetch('http://127.0.0.1:4242/get_pages')).json();
-                    console.log(this.files)
-                },
-
-                init() {
-                    this.retrieveData();
-                }
-
-            }));
-        });
-
+        `
     </script>
 
     <style>
