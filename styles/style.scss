@@ -1,9 +1,9 @@
-body {
-  background-color: red;
-}
+ol.this-style-1 {
 
-.test {
-  &__div {
-    background-color: green;
-  }
+    > li {
+        &::marker {
+            content: '? ';
+        }
+        // background-color: red;
+    }
 }

@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import injectHTML from 'vite-plugin-html-inject';
 import path from 'path';
 import fs from 'fs';
+import { posthtmlPlugin } from '@kingkongdevs/vite-plugin-posthtml';
 
 // TODO: функция переброса изображений если не в public
 
@@ -39,6 +40,13 @@ export default defineConfig({
         }
     },
     plugins: [
-        injectHTML(),
+        injectHTML()
     ],
+    server: {
+        watch: {
+            // Следим за изменениями в HTML файлах для авто-перезагрузки
+            path: path.resolve(__dirname, '/pages/**/*.html'),
+            events: ['change']
+        }
+    }
 });
